@@ -21,6 +21,7 @@ import com.google.inject.name.Names;
 import com.kise.kairosdb.core.aggregator.JsFilterAggregator;
 import com.kise.kairosdb.core.aggregator.JsFunctionAggregator;
 import com.kise.kairosdb.core.aggregator.JsRangeAggregator;
+import com.kise.kairosdb.core.groupby.FiscalCalendarGroubBy;
 import java.util.Properties;
 import org.kairosdb.core.CoreModule;
 import org.slf4j.LoggerFactory;
@@ -57,6 +58,8 @@ public class KiseKairosDBModule extends CoreModule{
 		}
 		
 		
+		
+		bind(FiscalCalendarGroubBy.class);
 		
 	}
 }

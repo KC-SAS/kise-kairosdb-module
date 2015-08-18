@@ -9,6 +9,10 @@ Module aggregators:
 - `js_filter`
 - `js_range`
 
+Module groupers:
+
+- `fiscal_period`
+
 This module will be updated with new aggregators and useful features.
 
 The code is copyrighted but contributed in Open Source under Apache 2 license.  
@@ -29,6 +33,8 @@ KairosDB V1.0+ running on Oracle Java 8+ runtime
 
 Now you can send queries with scripting 
 
+
+----
 
 ## Javascript aggregators
 
@@ -143,3 +149,39 @@ Example JSON of the aggregator to put in a query:
       },
       "script": "var result=0;\nwhile( values.hasNext()){\nresult += values.next().getLongValue();\n}\nreturn result;\n\n"
     },
+
+
+----
+
+
+## Group-By features
+
+### Group-by fiscal_period 
+
+This grouper uses fiscal period corresponding to [4-4-5 calendar](https://en.wikipedia.org/wiki/4%E2%80%934%E2%80%935_calendar) (more kinds of calendars could be added in the future).
+
+It can be parametrized with the type of weeks-per-period.
+
+Group-by parameters:
+
+- `calendar_type` the type of calendar:
+  - calendar_445
+  - calendar_454
+  - calendar_544 (by default if none specified) 
+ 
+Group-by information:
+
+- `name` : full period name e.g. "FY2015-P8"
+-  `fiscal_year`: the fiscal year e.g. 2015
+-  `quarter`: the quarter e.g. "Q3"
+-  `fiscal_period`: the fiscal period number e.g. 1
+
+Example usage:
+
+	"group_by": [
+        {
+          "name": "fiscal_period",
+          "calendar_type": "calendar_454"
+        }
+      ]
+
